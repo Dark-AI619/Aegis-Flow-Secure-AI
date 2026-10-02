@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "phishing": {
+    "id": "PB-PHISHING-01",
+    "name": "Phishing campaign containment (simulation)",
+    "minimum_score": 60,
+    "allowed_actions": [
+      "quarantine_email",
+      "block_domain",
+      "revoke_session"
+    ],
+    "approval_required": true,
+    "execution_mode": "simulation",
+    "mitre_attack": [
+      {
+        "id": "T1566.002",
+        "name": "Spearphishing Link",
+        "url": "https://attack.mitre.org/techniques/T1566/002/"
+      }
+    ]
+  }
+}

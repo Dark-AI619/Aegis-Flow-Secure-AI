@@ -1,0 +1,20 @@
+{
+  "schema_version": "1.0",
+  "title": "Normal team meeting \u2014 synthetic benign demo",
+  "alert_event_id": "normal-001",
+  "events": [
+    {
+      "id": "normal-001",
+      "kind": "email",
+      "timestamp": "2026-10-02T08:00:00Z",
+      "source": "synthetic-mail-gateway",
+      "account": "alice@company.example",
+      "sender": "team@company.example",
+      "subject": "Weekly team meeting",
+      "body": "Agenda: https://company.example/meetings/weekly",
+      "url": "https://company.example/meetings/weekly",
+      "spf": "pass",
+      "dkim": "pass"
+    }
+  ]
+}

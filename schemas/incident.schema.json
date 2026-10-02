@@ -1,0 +1,159 @@
+{
+  "$defs": {
+    "Event": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "maxLength": 120,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9_.@:+-]+$",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "email",
+            "url_click",
+            "signin"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "title": "Timestamp",
+          "type": "string"
+        },
+        "source": {
+          "default": "uploaded-json",
+          "maxLength": 500,
+          "title": "Source",
+          "type": "string"
+        },
+        "account": {
+          "maxLength": 120,
+          "minLength": 1,
+          "pattern": "^[a-zA-Z0-9_.@:+-]+$",
+          "title": "Account",
+          "type": "string"
+        },
+        "sender": {
+          "default": "",
+          "maxLength": 500,
+          "title": "Sender",
+          "type": "string"
+        },
+        "subject": {
+          "default": "",
+          "maxLength": 500,
+          "title": "Subject",
+          "type": "string"
+        },
+        "body": {
+          "default": "",
+          "maxLength": 4000,
+          "title": "Body",
+          "type": "string"
+        },
+        "url": {
+          "default": "",
+          "maxLength": 2000,
+          "title": "Url",
+          "type": "string"
+        },
+        "spf": {
+          "default": "unknown",
+          "enum": [
+            "pass",
+            "fail",
+            "unknown"
+          ],
+          "title": "Spf",
+          "type": "string"
+        },
+        "dkim": {
+          "default": "unknown",
+          "enum": [
+            "pass",
+            "fail",
+            "unknown"
+          ],
+          "title": "Dkim",
+          "type": "string"
+        },
+        "session_id": {
+          "anyOf": [
+            {
+              "maxLength": 120,
+              "minLength": 1,
+              "pattern": "^[a-zA-Z0-9_.@:+-]+$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Session Id"
+        },
+        "suspicious": {
+          "default": false,
+          "title": "Suspicious",
+          "type": "boolean"
+        },
+        "success": {
+          "default": false,
+          "title": "Success",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "timestamp",
+        "account"
+      ],
+      "title": "Event",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "schema_version": {
+      "const": "1.0",
+      "default": "1.0",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "title": {
+      "maxLength": 120,
+      "minLength": 1,
+      "title": "Title",
+      "type": "string"
+    },
+    "alert_event_id": {
+      "maxLength": 120,
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9_.@:+-]+$",
+      "title": "Alert Event Id",
+      "type": "string"
+    },
+    "events": {
+      "items": {
+        "$ref": "#/$defs/Event"
+      },
+      "maxItems": 100,
+      "minItems": 1,
+      "title": "Events",
+      "type": "array"
+    }
+  },
+  "required": [
+    "title",
+    "alert_event_id",
+    "events"
+  ],
+  "title": "Bundle",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}

@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "source": "AegisFlow synthetic demo feed (not live threat intelligence)",
+  "indicators": [
+    {
+      "domain": "secure-payroll.test",
+      "verdict": "malicious",
+      "description": "Synthetic credential phishing domain used only for the demo."
+    },
+    {
+      "domain": "company.example",
+      "verdict": "benign",
+      "description": "Synthetic internal company domain used only for the benign demo."
+    }
+  ]
+}

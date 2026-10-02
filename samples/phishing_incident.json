@@ -1,0 +1,77 @@
+{
+  "schema_version": "1.0",
+  "title": "Payroll credential phishing campaign \u2014 synthetic demo",
+  "alert_event_id": "mail-001",
+  "events": [
+    {
+      "id": "mail-001",
+      "kind": "email",
+      "timestamp": "2026-10-02T09:01:00Z",
+      "source": "synthetic-mail-gateway",
+      "account": "alice@company.example",
+      "sender": "Payroll Team <notice@secure-payroll.test>",
+      "subject": "Urgent: verify your payroll password",
+      "body": "Your account will be suspended. Verify your password at https://secure-payroll.test/login",
+      "url": "https://secure-payroll.test/login",
+      "spf": "fail",
+      "dkim": "fail"
+    },
+    {
+      "id": "mail-002",
+      "kind": "email",
+      "timestamp": "2026-10-02T09:02:00Z",
+      "source": "synthetic-mail-gateway",
+      "account": "bob@company.example",
+      "sender": "Payroll Team <notice@secure-payroll.test>",
+      "subject": "Urgent: verify your payroll password",
+      "body": "Your account will be suspended. Verify your password at https://secure-payroll.test/login",
+      "url": "https://secure-payroll.test/login",
+      "spf": "fail",
+      "dkim": "fail"
+    },
+    {
+      "id": "mail-003",
+      "kind": "email",
+      "timestamp": "2026-10-02T09:03:00Z",
+      "source": "synthetic-mail-gateway",
+      "account": "carol@company.example",
+      "sender": "Payroll Team <notice@secure-payroll.test>",
+      "subject": "Urgent: verify your payroll password",
+      "body": "Your account will be suspended. Verify your password at https://secure-payroll.test/login",
+      "url": "https://secure-payroll.test/login",
+      "spf": "fail",
+      "dkim": "fail"
+    },
+    {
+      "id": "click-001",
+      "kind": "url_click",
+      "timestamp": "2026-10-02T09:07:00Z",
+      "source": "synthetic-proxy-log",
+      "account": "alice@company.example",
+      "url": "https://secure-payroll.test/login"
+    },
+    {
+      "id": "signin-001",
+      "kind": "signin",
+      "timestamp": "2026-10-02T09:08:00Z",
+      "source": "synthetic-identity-log",
+      "account": "alice@company.example",
+      "url": "https://secure-payroll.test/login",
+      "session_id": "session-alice-001",
+      "suspicious": true,
+      "success": true
+    },
+    {
+      "id": "mail-unrelated",
+      "kind": "email",
+      "timestamp": "2026-10-02T09:10:00Z",
+      "source": "synthetic-mail-gateway",
+      "account": "david@company.example",
+      "sender": "team@company.example",
+      "subject": "Lunch plans",
+      "body": "Lunch at 1 pm?",
+      "spf": "pass",
+      "dkim": "pass"
+    }
+  ]
+}

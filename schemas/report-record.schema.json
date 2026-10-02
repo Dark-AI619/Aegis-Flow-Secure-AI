@@ -1,0 +1,280 @@
+{
+  "$defs": {
+    "Action": {
+      "additionalProperties": false,
+      "properties": {
+        "kind": {
+          "enum": [
+            "quarantine_email",
+            "block_domain",
+            "revoke_session"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "target": {
+          "title": "Target",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "description": {
+          "title": "Description",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "target",
+        "evidence_ids",
+        "description"
+      ],
+      "title": "Action",
+      "type": "object"
+    },
+    "Assessment": {
+      "additionalProperties": false,
+      "properties": {
+        "summary": {
+          "maxLength": 1500,
+          "minLength": 1,
+          "title": "Summary",
+          "type": "string"
+        },
+        "rationale": {
+          "items": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "maxItems": 8,
+          "title": "Rationale",
+          "type": "array"
+        },
+        "evidence_ids": {
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 30,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "uncertainty": {
+          "maxLength": 1000,
+          "title": "Uncertainty",
+          "type": "string"
+        }
+      },
+      "required": [
+        "summary",
+        "rationale",
+        "evidence_ids",
+        "uncertainty"
+      ],
+      "title": "Assessment",
+      "type": "object"
+    },
+    "Evidence": {
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "title": "Id",
+          "type": "string"
+        },
+        "event_id": {
+          "title": "Event Id",
+          "type": "string"
+        },
+        "indicator": {
+          "title": "Indicator",
+          "type": "string"
+        },
+        "kind": {
+          "title": "Kind",
+          "type": "string"
+        },
+        "detail": {
+          "title": "Detail",
+          "type": "string"
+        },
+        "source": {
+          "title": "Source",
+          "type": "string"
+        },
+        "observed_at": {
+          "title": "Observed At",
+          "type": "string"
+        },
+        "event_sha256": {
+          "title": "Event Sha256",
+          "type": "string"
+        }
+      },
+      "required": [
+        "id",
+        "event_id",
+        "indicator",
+        "kind",
+        "detail",
+        "source",
+        "observed_at",
+        "event_sha256"
+      ],
+      "title": "Evidence",
+      "type": "object"
+    },
+    "Guidance": {
+      "additionalProperties": false,
+      "properties": {
+        "explanation": {
+          "maxLength": 1500,
+          "minLength": 1,
+          "title": "Explanation",
+          "type": "string"
+        },
+        "analyst_checks": {
+          "items": {
+            "maxLength": 500,
+            "type": "string"
+          },
+          "maxItems": 6,
+          "title": "Analyst Checks",
+          "type": "array"
+        }
+      },
+      "required": [
+        "explanation",
+        "analyst_checks"
+      ],
+      "title": "Guidance",
+      "type": "object"
+    }
+  },
+  "additionalProperties": false,
+  "properties": {
+    "id": {
+      "title": "Id",
+      "type": "string"
+    },
+    "title": {
+      "title": "Title",
+      "type": "string"
+    },
+    "input_sha256": {
+      "title": "Input Sha256",
+      "type": "string"
+    },
+    "created_at": {
+      "title": "Created At",
+      "type": "string"
+    },
+    "mode": {
+      "enum": [
+        "offline",
+        "groq",
+        "offline-fallback"
+      ],
+      "title": "Mode",
+      "type": "string"
+    },
+    "status": {
+      "default": "review_required",
+      "enum": [
+        "review_required",
+        "contained",
+        "dismissed"
+      ],
+      "title": "Status",
+      "type": "string"
+    },
+    "severity": {
+      "enum": [
+        "low",
+        "medium",
+        "high"
+      ],
+      "title": "Severity",
+      "type": "string"
+    },
+    "risk_score": {
+      "maximum": 100,
+      "minimum": 0,
+      "title": "Risk Score",
+      "type": "integer"
+    },
+    "evidence": {
+      "items": {
+        "$ref": "#/$defs/Evidence"
+      },
+      "title": "Evidence",
+      "type": "array"
+    },
+    "affected_accounts": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Affected Accounts",
+      "type": "array"
+    },
+    "enrichment": {
+      "items": {
+        "additionalProperties": true,
+        "type": "object"
+      },
+      "title": "Enrichment",
+      "type": "array"
+    },
+    "assessment": {
+      "$ref": "#/$defs/Assessment"
+    },
+    "guidance": {
+      "$ref": "#/$defs/Guidance"
+    },
+    "actions": {
+      "items": {
+        "$ref": "#/$defs/Action"
+      },
+      "title": "Actions",
+      "type": "array"
+    },
+    "usage": {
+      "additionalProperties": true,
+      "title": "Usage",
+      "type": "object"
+    },
+    "warning": {
+      "default": "",
+      "title": "Warning",
+      "type": "string"
+    },
+    "metadata": {
+      "additionalProperties": true,
+      "title": "Metadata",
+      "type": "object"
+    }
+  },
+  "required": [
+    "id",
+    "title",
+    "input_sha256",
+    "created_at",
+    "mode",
+    "severity",
+    "risk_score",
+    "evidence",
+    "affected_accounts",
+    "enrichment",
+    "assessment",
+    "guidance",
+    "actions",
+    "usage",
+    "metadata"
+  ],
+  "title": "Incident",
+  "type": "object",
+  "$schema": "https://json-schema.org/draft/2020-12/schema"
+}
